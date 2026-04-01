@@ -1,16 +1,31 @@
 # Audio MCP
 
-`@genai-gametools/audio-mcp` is a stdio-based [Model Context Protocol](https://modelcontextprotocol.io/) server for AI audio workflows. It exposes tools for:
+`@genai-gametools/audio-mcp` is a stdio-based [Model Context Protocol](https://modelcontextprotocol.io/) server for AI audio workflows.
+
+It is designed for agentic tooling, prototypes, and game pipelines where an LLM should be able to do more than just suggest prompts. Instead of wiring several audio APIs and local processing scripts into every client, this server gives you one MCP endpoint that can generate audio, keep track of the files it creates, and run common post-processing steps on the results.
+
+In practice, that means an MCP client can ask for a laser blast, an ambient exploration loop, a voiced line of dialogue, or an engine-ready export without needing custom glue code for each provider. Generated files are written to disk, so they can move directly into your content pipeline, test scene, or game project.
+
+The server currently exposes tools for:
 
 - generating music, sound effects, and voice
 - organizing generated assets
 - running common audio-processing steps with `ffmpeg`
+
+That makes it useful both as a creative generation layer and as a practical bridge between cloud audio models and local project assets.
 
 The current implementation supports three providers:
 
 - `elevenlabs` for SFX, music, voice, and voice listing
 - `stable-audio` for music and SFX
 - `suno` for music
+
+## Good Fit For
+
+- MCP clients that need one audio tool surface instead of provider-specific integrations
+- game and interactive prototypes that need fast iteration on SFX, music beds, and voice lines
+- asset pipelines that want generated files saved locally and available for later processing
+- workflows that need basic cleanup steps like trimming, fading, looping, normalization, and conversion
 
 ## Features
 
